@@ -10,8 +10,37 @@ print('Pandas version ' + pd.__version__)
 print('Matplotlib version ' + matplotlib.__version__)
 
 df = pd.read_csv('qj2.csv')
+df.rename(columns={"I was productive today." : "Productivity",
+                   "I felt in control of my day." : "Control",
+                   "About how many minutes did you spend working today? (minutes)" : "Work",
+                   "About how many minutes did you spend relaxing today? (minutes)" : "Relaxation",
+                   "About how many of these moments socializing were spent with close friends or family?" : "Social",
+                   "About how many minutes did you spend doing physical activities today?" : "Exercise" }, inplace=True)
 print(df)
 print(df.dtypes)
+# def f(x):
+#     return (x[3]/7 + x[24]/420 + x[29]/180) * x[4]
+#     # - x[19]/240
+# df['corr'] = df.apply(f, axis=1)
+print df.describe()
+print df.corr()
+print df.cov()
+print df[['Productivity','Control']].corr()
+plt.plot(df['corr'])
+plt.ylabel('Productivity')
+plt.xlabel('Time')
+# # Maximum value in the data set
+# MaxValue = df['Births'].max()
+# # Name associated with the maximum value
+# MaxName = df['Names'][df['Births'] == df['Births'].max()].values
+# # Text to display on graph
+# Text = str(MaxValue) + " - " + MaxName
+# # Add text to graph
+# plt.annotate(Text, xy=(1, MaxValue), xytext=(8, 0), xycoords=('axes fraction', 'data'), textcoords='offset points')
+plt.title('Josh: Productivity Over Time')
+# #Sorted.head(1) can also be used
+plt.savefig('productivity.png')
+
 
 # ## CREATE/GET DATA
 # # The inital set of baby names and bith rates
