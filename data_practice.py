@@ -10,25 +10,51 @@ print('Pandas version ' + pd.__version__)
 print('Matplotlib version ' + matplotlib.__version__)
 
 df = pd.read_csv('qj2.csv')
-df.rename(columns={"I was productive today." : "Productivity",
+df.rename(columns={"Overall, I am satisfied with how I did today." : "Satisfaction",
+                   "I moved closer to becoming my ideal self." : "Ideal Self",
                    "I felt in control of my day." : "Control",
+                   "I was productive today." : "Productivity",
+                   "I experienced a lot of stress today." : "Stress",
+                   "Briefly describe your day and your thoughts." : "Thoughts",
+                   "Did any unusual circumstances occur today that might of had a significant influence on your results?" : "Unusual Day",
+                   "How many times did you have sex?" : "Sex",
+                   "How many times did you masturbate?" : "Masturbation",
+                   "How many mg of caffeine did you have today? (1 cup of coffee is about 200mg, 1 cup of green tea is about 70mg, 1 cup of black tea is about 120mg, 1 can of coke is about 35 mg)" : "Caffeine",
+                   "How many standard drinks of alcohol did you have? (1 standard drink is a shot of liquor, can of beer, or glass of wine)" : "Alcohol",
+                   "How many grams of weed did you smoke?" : "Weed",
+                   "How many minutes did you meditate today?" : "Meditation",
+                   "How many minutes did you play video games today?" : "Video Games",
+                   "How many minutes did you watch TV today?" : "TV",
+                   "Did you visually plan your day the night before?" : "Planning",
+                   "List three things you are grateful for today." : "Gratitude",
+                   "About how many minutes did you spend socializing today?" : "Social",
+                   "About how many of these minutes socializing were spent with close friends or family?" : "Social Close",
+                   "Overall, I was satisfied with my social time today." : "Social Satisfaction",
+                   "Overall, I feel this social time helped me build or strengthen supportive and rewarding relationships." : "Social Building",
+                   "I contributed to the well being or happiness of someone else today." : "Helping Others",
+                   "Briefly describe your social time today." : "Social Thoughts",
                    "About how many minutes did you spend working today? (minutes)" : "Work",
+                   "The time I spent working today moved me closer to my long-term goals." : "Work Goals",
+                   "I worked on something important to me today." : "Work Important",
+                   "Briefly describe your work time today." : "Work Thoughts",
                    "About how many minutes did you spend relaxing today? (minutes)" : "Relaxation",
-                   "About how many of these moments socializing were spent with close friends or family?" : "Social",
                    "About how many minutes did you spend doing physical activities today?" : "Exercise" }, inplace=True)
 print(df)
 print(df.dtypes)
+print df.style
+
+print df.describe()
+print df.corr()
+# print df.cov()
+# print df[['Productivity','Control']].corr()
+
 # def f(x):
 #     return (x[3]/7 + x[24]/420 + x[29]/180) * x[4]
 #     # - x[19]/240
 # df['corr'] = df.apply(f, axis=1)
-print df.describe()
-print df.corr()
-print df.cov()
-print df[['Productivity','Control']].corr()
-plt.plot(df['corr'])
-plt.ylabel('Productivity')
-plt.xlabel('Time')
+# plt.plot(df['corr'])
+# plt.ylabel('Productivity')
+# plt.xlabel('Time')
 # # Maximum value in the data set
 # MaxValue = df['Births'].max()
 # # Name associated with the maximum value
