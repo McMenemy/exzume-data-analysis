@@ -16,6 +16,8 @@ print('Python version ' + sys.version)
 print('Pandas version ' + pd.__version__)
 
 @app.route('/', methods=["POST"])
+
 def correlate():
-    print request.data
-    return request.data
+    if request.headers['Content-Type'] == 'application/json':
+        print request.data
+    # return request.data
