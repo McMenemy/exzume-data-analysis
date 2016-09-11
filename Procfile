@@ -1,1 +1,1 @@
-web: gunicorn <correlations>:app --log-file -
+web: gunicorn <app>:app --log-file -
