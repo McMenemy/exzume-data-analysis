@@ -7,37 +7,28 @@
 #   local port is http://0.0.0.0:5000/
 
 import os
-from flask import Flask
+from flask import Flask, request
 
 app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
 
 print(os.environ['APP_SETTINGS'])
 
-@app.route('/')
-def hello():
-    return "Hello World!"
-
-@app.route('/<name>')
-def hello_name(name):
-        return "Hello {}!".format(name)
-
+@app.route('/', methods=['POST','GET'])
+def correlate():
+    if request.headers['Content-Type'] == 'application/json':
+        print(request.data)
+        return request.data
+    elif request.method == 'GET':
+        return request.data
 if __name__ == '__main__':
             app.run()
 
-# from flask import Flask, request
-# app = Flask(__name__)
-# 
+
 # import sys
 # import pandas as pd
 # # from pd import DataFrame
-# 
+#
 # print('Python version ' + sys.version)
 # print('Pandas version ' + pd.__version__)
-# 
-# @app.route('/', methods=["POST"])
-# 
-# def correlate():
-#     if request.headers['Content-Type'] == 'application/json':
-#         print request.data
-#     # return request.data
+#

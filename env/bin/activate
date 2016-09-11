@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelavent variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/asteria-macbook/Github/exzume-data-analysis/env"
+VIRTUAL_ENV="/Users/alan/Documents/Coding/GitHub/exzume-data-analysis/env"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
