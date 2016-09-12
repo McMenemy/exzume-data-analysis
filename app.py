@@ -9,6 +9,7 @@
 import os
 from flask import Flask, request, jsonify
 import json
+import pandas as pd
 from pandas import DataFrame
 
 app = Flask(__name__)
@@ -19,8 +20,13 @@ print(os.environ['APP_SETTINGS'])
 @app.route('/', methods=['POST','GET'])
 def correlate():
     if request.method == 'POST':
-        data_dict = json.loads(request.data.decode('utf-8'))
-        return request.data
+        data_dictionary = json.loads(json.dumps(request.data.decode('utf-8')))
+        print(data_dictionary['data'])
+        df = pd.DataFrame(data_dictionary['data'])
+        print(df)
+        print(df.corr())
+        print(df.describe())
+        return jsonify(df.corr())
         # return jsonify(json.loads(request.data.decode('utf-8')))
     elif request.method == 'GET':
         return jsonify(alan='alan')
