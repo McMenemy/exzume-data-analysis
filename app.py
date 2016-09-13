@@ -19,42 +19,12 @@ print(os.environ['APP_SETTINGS'])
 
 @app.route('/', methods=['POST','GET'])
 def correlate():
-    if request.method == 'POST':
-        step1 = request.data
-        print(step1)
-        step2 = request.data.decode('utf-8')
-        print(step2)
-        # step25 = step2.replace('\\"',"\"")
-        # print(step25)
-        # step3 = json.dumps(step25)
-        # print(step3)
-        step4 = json.loads(step2)
-        print(step4)
-        print('done')
-        data_dictionary = json.loads(step2)
-        print(data_dictionary['data'])
-        d = json.loads(data_dictionary['data'])
-        print(d)
-        print(d[0])
-        df = pd.DataFrame(d)
-        print(df)
-        print(df.corr())
-        print(df.describe())
-        print(df.corr().to_json)
-        print(df.corr().iloc[0]['f2'])
-        return json.dumps(df.corr().iloc[0]['f2'])
-        # return jsonify(json.loads(request.data.decode('utf-8')))
-    elif request.method == 'GET':
-        return jsonify(alan='alan')
+    # expects JSON in form {data: [{f1: value, f2: value}, {f1: value, f2: value}, ....]}
+    data_dictionary = json.loads(request.data.decode('utf-8'))
+    data = json.loads(data_dictionary['data'])
+    df = pd.DataFrame(data)
+    return json.dumps(df.corr().iloc[0]['f2'])
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
 
-
-# import sys
-# import pandas as pd
-# # from pd import DataFrame
-#
-# print('Python version ' + sys.version)
-# print('Pandas version ' + pd.__version__)
-#
