@@ -12,7 +12,6 @@ lockfile==0.12.2
 MarkupSafe==0.23
 numpy==1.11.0
 pandas==0.18.1
-platformio==2.11.2
 pycparser==2.14
 pyparsing==2.1.4
 pyserial==3.1.1
