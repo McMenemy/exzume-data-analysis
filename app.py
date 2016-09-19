@@ -13,7 +13,7 @@ import pandas as pd
 from pandas import DataFrame
 from collections import OrderedDict
 import scipy
-# from scipy.stats import pearsonr
+from scipy.stats import pearsonr
 # Parameters :
 # x : 1D array
 # y : 1D array the same length as x
@@ -28,15 +28,19 @@ print(os.environ['APP_SETTINGS'])
 #change route name to '/correlateTwo'?
 @app.route('/correlateTwo', methods=['POST','GET'])
 def correlateTwo():
-    # expects JSON in form {data: [{f1: value, f2: value}, {f1: value, f2: value}, ....]}
+    # expects JSON in form { data: { f1: [val1, val2, ...], f2: [val1, val2, ...]} }
     data_dictionary = json.loads(request.data.decode('utf-8'))
     data = json.loads(data_dictionary['data'])
-    print(data)
-    df = pd.DataFrame(data)
-    df_corr = df.corr()
-    print(df)
-    print(df_corr)
-    return json.dumps(df_corr.iloc[0]['f2'])
+    f1 = data['f1']
+    f2 = data['f2']
+    result = pearsonr(f1, f2)
+    print(result)
+    # print(data)
+    # df = pd.DataFrame(data)
+    # df_corr = df.corr()
+    # print(df)
+    # print(df_corr)
+    return json.dumps(result)
 
 @app.route('/correlateMany', methods=['POST'])
 def correlateMany():
