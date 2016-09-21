@@ -9,6 +9,7 @@
 import os
 from flask import Flask, request, jsonify
 import json
+import simplejson
 import pandas as pd
 from pandas import DataFrame
 from collections import OrderedDict
@@ -62,7 +63,7 @@ def correlateMany():
         for x in range(1, num_corr_cols + 1):
             thisRow.append(row[x])
         dict[row[0]] = thisRow
-    return json.dumps(dict)
+    return simplejson.dumps(dict, ignore_nan=True)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
