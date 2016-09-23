@@ -26,7 +26,14 @@ app.config.from_object(os.environ['APP_SETTINGS'])
 
 print(os.environ['APP_SETTINGS'])
 
-#change route name to '/correlateTwo'?
+@app.route('/')
+def home():
+        return "micro service is running"
+
+def status():
+    status = { status: 'running' }
+    return json.dumps(status)
+
 @app.route('/correlateTwo', methods=['POST','GET'])
 def correlateTwo():
     # expects JSON in form { data: { f1: [val1, val2, ...], f2: [val1, val2, ...]} }
