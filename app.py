@@ -32,15 +32,13 @@ def correlateTwo():
     # expects JSON in form { data: { f1: [val1, val2, ...], f2: [val1, val2, ...]} }
     data_dictionary = json.loads(request.data.decode('utf-8'))
     data = json.loads(data_dictionary['data'])
-    f1 = data['f1']
-    f2 = data['f2']
-    result = pearsonr(f1, f2)
-    print(result)
-    # print(data)
-    # df = pd.DataFrame(data)
-    # df_corr = df.corr()
-    # print(df)
-    # print(df_corr)
+
+    df_data = pd.DataFrame(data)
+    df_data_clean = df_data.dropna()
+    print(df_data)
+    print(df_data_clean)
+    result = pearsonr(df_data_clean['f1'], df_data_clean['f2'])
+
     return json.dumps(result)
 
 @app.route('/correlateMany', methods=['POST'])
